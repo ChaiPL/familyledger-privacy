@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>隐私政策 — 家庭账本（FamilyLedger）</title>
+<meta name="description" content="家庭账本的隐私政策：没有服务器，账单只保存在你的 iPhone 和你自己的 iCloud。">
+<style>
+  :root{
+    --bg:#ffffff; --fg:#1a1a1a; --muted:#5f6368; --line:#e4e6e9;
+    --card:#f7f8fa; --accent:#1a7f5a; --accent-soft:#e8f5ef;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#16181a; --fg:#e8eaed; --muted:#9aa0a6; --line:#2c2f33;
+      --card:#1e2124; --accent:#4ade9f; --accent-soft:#17301f;
+    }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--fg);
+    font:16px/1.75 -apple-system,BlinkMacSystemFont,"SF Pro SC","PingFang SC","Helvetica Neue",Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:56px 24px 96px}
+  header{border-bottom:1px solid var(--line); padding-bottom:28px; margin-bottom:36px}
+  h1{font-size:30px; line-height:1.3; margin:0 0 10px; letter-spacing:-.02em}
+  .meta{color:var(--muted); font-size:14px; margin:0}
+  .meta span{display:inline-block; margin-right:18px}
+  h2{font-size:20px; margin:40px 0 12px; letter-spacing:-.01em}
+  p{margin:0 0 14px}
+  ul,ol{margin:0 0 14px; padding-left:22px}
+  li{margin:6px 0}
+  a{color:var(--accent)}
+  code{
+    background:var(--card); border:1px solid var(--line); border-radius:4px;
+    padding:1px 6px; font-size:13px; font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  .lead{
+    background:var(--accent-soft); border:1px solid var(--line);
+    border-radius:12px; padding:20px 22px; margin:0 0 32px;
+  }
+  .lead strong{color:var(--accent)}
+  .lead p:last-child{margin-bottom:0}
+  table{width:100%; border-collapse:collapse; margin:0 0 20px; font-size:15px}
+  th,td{border:1px solid var(--line); padding:10px 12px; text-align:left; vertical-align:top}
+  th{background:var(--card); font-weight:600}
+  blockquote{
+    margin:18px 0; padding:12px 18px; border-left:3px solid var(--accent);
+    background:var(--card); border-radius:0 8px 8px 0; color:var(--muted);
+  }
+  blockquote p:last-child{margin-bottom:0}
+  footer{
+    margin-top:56px; padding-top:24px; border-top:1px solid var(--line);
+    color:var(--muted); font-size:14px;
+  }
+  hr{border:0; border-top:1px solid var(--line); margin:36px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>隐私政策</h1>
+  <p class="meta">
+    <span><strong>应用</strong>　家庭账本（FamilyLedger）</span>
+    <span><strong>生效日期</strong>　2026 年 9 月 30 日</span>
+  </p>
+</header>
+
+<div class="lead">
+  <p><strong>家庭账本没有服务器。</strong>你的账单默认只保存在你自己的 iPhone 上；开启 iCloud 同步后，数据进入<strong>你自己的</strong> Apple iCloud 私有数据库。开发者无法访问你的任何账单数据，也无法主动收集任何个人信息。</p>
+</div>
+
+<h2>1. 我们不收集什么</h2>
+<p>家庭账本<strong>不收集任何个人信息</strong>：</p>
+<ul>
+  <li>不需要注册，不需要账号</li>
+  <li>不需要手机号、邮箱或真实姓名</li>
+  <li>不上传账单、备注、商户名称、金额到任何开发者服务器</li>
+  <li>没有广告，没有第三方分析 SDK，没有行为追踪</li>
+</ul>
+<p>换句话说，我们手上没有你的数据，因为数据从来就没有到过我们这里。</p>
+
+<h2>2. 你的数据存在哪里</h2>
+<table>
+  <thead><tr><th>场景</th><th>存储位置</th><th>谁能访问</th></tr></thead>
+  <tbody>
+    <tr><td>默认（未开启 iCloud）</td><td>你 iPhone 沙盒内的 SQLite 数据库</td><td>只有你</td></tr>
+    <tr><td>开启 iCloud 同步 / 家庭共享</td><td>你自己的 Apple iCloud 私有数据库</td><td>你 + 你授权的家庭成员</td></tr>
+    <tr><td>应用备份</td><td>iOS 系统的 iCloud 设备备份</td><td>由你的 Apple 账户控制</td></tr>
+  </tbody>
+</table>
+<p>iCloud 容器标识为 <code>iCloud.com.familyledger.app</code>，属于<strong>你的</strong> Apple 账户，Apple 的服务器只做加密存储和中转，开发者无权访问。</p>
+<blockquote><p><strong>未开启 iCloud 也能用：</strong>App 会进入本地模式，记账、统计、导入导出全部可用，只是不跨设备、不共享。</p></blockquote>
+
+<h2>3. 家庭共享是怎么工作的</h2>
+<p>家庭共享基于 Apple 的 <strong>CloudKit</strong>（<code>CKShare</code>）机制：</p>
+<ul>
+  <li>共享的数据仍然存放在<strong>你的</strong> iCloud 私有数据库里，不是开发者的</li>
+  <li>你通过 Apple 官方的邀请流程添加成员，对方需用自己的 Apple ID 接受</li>
+  <li>你可以<strong>随时</strong>移除成员、退出家庭、或解散整个家庭</li>
+  <li><strong>权限说明：</strong>成员可以查看家庭账本全貌，但只能修改和删除<strong>自己创建</strong>的账单。这是在应用层逐条校验的权限，不依赖界面隐藏按钮</li>
+  <li>移除成员后，对方在本机的家庭数据会一并清理</li>
+</ul>
+
+<h2>4. 第三方组件</h2>
+<p>家庭账本<strong>不集成任何第三方 SDK</strong>。它只使用 Apple 系统框架：SwiftUI、SQLite3、CloudKit、LocalAuthentication（Face ID / Touch ID）。</p>
+<p>Face ID 的生物特征数据由 iOS 保管在设备安全区（Secure Enclave），<strong>不会离开你的设备</strong>，开发者无法读取。</p>
+
+<h2>5. 你对自己的数据的控制权</h2>
+<ul>
+  <li><strong>查看：</strong>App 内随时查看全部账单</li>
+  <li><strong>导出：</strong>App 内可将账目导出到你自己的设备</li>
+  <li><strong>修改与删除：</strong>单条账单可编辑、软删除、恢复</li>
+  <li><strong>批量删除：</strong>解散家庭即删除全部共享数据；卸载 App 即删除本机数据</li>
+  <li><strong>关闭同步：</strong>在设置中关闭 iCloud 同步后，数据仅保留在本机</li>
+</ul>
+
+<h2>6. 导入功能</h2>
+<p>你可以从微信、支付宝或通用 CSV / XLSX 文件导入历史账单。<strong>导入过程完全在你的设备上完成</strong>，文件不会被上传到任何服务器。</p>
+<p>导入分两步：先预览、确认无误再写入；每批导入都可一键撤销。导错的账单不会留在你的账本里。</p>
+
+<h2>7. 儿童隐私</h2>
+<p>家庭账本是面向家庭财务管理的记账工具，不面向 13 岁以下儿童，也不会主动收集未成年人的个人信息。</p>
+
+<h2>8. 政策变更</h2>
+<p>本政策如有变更，会在应用更新说明中标注，并更新本页顶部的生效日期。重大变更会通过 App 内提示告知。</p>
+
+<h2>9. 联系我们</h2>
+<p>对本隐私政策有疑问，可通过以下方式联系：</p>
+<ul>
+  <li>GitHub Issues：<a href="https://github.com/ChaiPL/familyledger-privacy/issues">github.com/ChaiPL/familyledger-privacy/issues</a></li>
+</ul>
+
+<footer>
+  <p>家庭账本 · 本地优先，数据只留在你自己的设备上。</p>
+</footer>
+
+</div>
+</body>
+</html>
