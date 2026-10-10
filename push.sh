@@ -11,7 +11,14 @@ HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$HERE"
 
 echo "🔍 检查 SSH 授权"
-ssh -o BatchMode=yes -o ConnectTimeout=8 -T git@github.com 2>&1 | head -1
+# ⚠️ `ssh -T git@github.com` 认证成功时也返回退出码 1
+#    （GitHub 固定回 "does not provide shell access"），不能交给 set -e 判定
+ssh_out=$(ssh -o BatchMode=yes -o ConnectTimeout=8 -T git@github.com 2>&1 || true)
+echo "  $ssh_out"
+case "$ssh_out" in
+  *"successfully authenticated"*) ;;
+  *) echo "❌ SSH 未通过 GitHub 认证，停止推送"; exit 1 ;;
+esac
 
 if ! git remote get-url origin >/dev/null 2>&1; then
   git remote add origin "$REPO"
